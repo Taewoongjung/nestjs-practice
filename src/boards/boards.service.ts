@@ -12,7 +12,7 @@ export class BoardsService {
     return this.boards; // 배열에 들어있는 모든 값을 호출
   }
 
-  createBoard(createBoardDto: CreateBoardDto) {
+  createBoard(createBoardDto: CreateBoardDto) { // Create
     const { title, description } = createBoardDto;
 
     const board: Board = {
@@ -26,7 +26,11 @@ export class BoardsService {
     return board;
   }
 
-  getBoardById(id: string): Board {
+  getBoardById(id: string): Board { // Read
     return this.boards.find((board) => board.id === id);
+  }
+
+  deleteBoard(id: string): void { // Delete
+    this.boards = this.boards.filter((board) => board.id !== id);
   }
 }
