@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Board, BoardStatus } from "./board.model";
 import { v1 as uuid } from 'uuid';
 import { CreateBoardDto } from "./dto/create-board.dto";
-import { create } from "domain";
+
 @Injectable()
 export class BoardsService {
   private boards: Board[] = []; // 게시판 데이터를 담기 위함
@@ -30,7 +30,7 @@ export class BoardsService {
     return this.boards.find((board) => board.id === id);
   }
 
-  updataBoardStatus(id: string, status: BoardStatus): Board { // Update
+  updateBoardStatus(id: string, status: BoardStatus): Board { // Update
     const board = this.getBoardById(id);
     board.status = status;
     return board;
