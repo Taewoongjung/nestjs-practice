@@ -9,4 +9,5 @@ import { typeORMConfig } from "./configs/typeorm.config";
     BoardsModule
   ],
 })
+
 export class AppModule {}
