@@ -1,6 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, UsePipes, ValidationPipe } from "@nestjs/common";
 import { BoardsService } from "./boards.service";
 import { Board } from "./board.entity";
+import { CreateBoardDto } from "./dto/create-board.dto";
 
 @Controller('boards')
 export class BoardsController {
@@ -10,7 +11,13 @@ export class BoardsController {
   // getAllBoard(): Board[] { // 모든 게시물을 가져오는 핸들러(handdler)
   //   return this.boardsService.getAllBoards();
   // }
-  //
+
+  @Post()
+  @UsePipes(ValidationPipe)
+  createBoard(@Body() createBoardDto: CreateBoardDto): Promise<Board> {
+    return this.boardsService.createBoard(createBoardDto);
+  }
+
   // @Post() // Create
   // @UsePipes(ValidationPipe)
   // createBoard(@Body() createBoardDto: CreateBoardDto): Board {
