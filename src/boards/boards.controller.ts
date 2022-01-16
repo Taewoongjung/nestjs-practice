@@ -7,11 +7,6 @@ import { CreateBoardDto } from "./dto/create-board.dto";
 export class BoardsController {
   constructor(private boardsService: BoardsService){}
 
-  // @Get('/')
-  // getAllBoard(): Board[] { // 모든 게시물을 가져오는 핸들러(handdler)
-  //   return this.boardsService.getAllBoards();
-  // }
-
   @Post()
   @UsePipes(ValidationPipe)
   createBoard(@Body() createBoardDto: CreateBoardDto): Promise<Board> {
