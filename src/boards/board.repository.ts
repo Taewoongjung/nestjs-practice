@@ -14,7 +14,6 @@ export class BoardRepository extends Repository<Board> {
       description,
       status: BoardStatus.PUBLIC
     })
-
     await this.save(board);
     return board;
   }
