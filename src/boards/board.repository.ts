@@ -2,6 +2,7 @@ import { EntityRepository, Repository } from "typeorm";
 import { Board } from "./board.entity";
 import { CreateBoardDto } from "./dto/create-board.dto";
 import { BoardStatus } from "./board-status.enum";
+import { NotFoundException } from "@nestjs/common";
 
 @EntityRepository(Board)
 export class BoardRepository extends Repository<Board> {
@@ -16,5 +17,13 @@ export class BoardRepository extends Repository<Board> {
     })
     await this.save(board);
     return board;
+  }
+
+  async getBoardById(id: number): Promise <Board> {
+    const found = await this.findOne(id);
+    if(!found) {
+      throw new NotFoundException(`Can't find Board with id ${id}`);
+    }
+    return found;
   }
 }
