@@ -16,13 +16,14 @@ export class BoardsService {
     return this.boardRepository.createBoard(createBoardDto);
   }
 
-  // async getBoardById(id: number): Promise <Board> {
-  //   const found = await this.boardRepository.findOne(id);
-  //   if(!found) {
-  //     throw new NotFoundException(`Can't find Board with id ${id}`);
-  //   }
-  //   return found;
-  // }
+  async deleteBoard(id: number): Promise<void> {
+    const result = await this.boardRepository.delete(id);
+
+    if(result.affected === 0) {
+      throw new NotFoundException(`Can't find Board with id ${id}`);
+    }
+  }
+
   getBoardById(id: number): Promise <Board> {
     return this.boardRepository.getBoardById(id);
   }
