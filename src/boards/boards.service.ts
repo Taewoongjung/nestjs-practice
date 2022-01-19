@@ -20,6 +20,10 @@ export class BoardsService {
     return this.boardRepository.createBoard(createBoardDto);
   }
 
+  async getAllBoards(): Promise<Board[]> {
+    return this.boardRepository.find(); // 모든 게시물 가져오기
+  }
+
   async deleteBoard(id: number): Promise<void> {
     const result = await this.boardRepository.delete(id);
 
