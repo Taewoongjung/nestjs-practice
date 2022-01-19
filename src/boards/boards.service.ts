@@ -12,6 +12,10 @@ export class BoardsService {
     private boardRepository: BoardRepository,
   ) {}
 
+  getBoardById(id: number): Promise <Board> {
+    return this.boardRepository.getBoardById(id);
+  }
+
   createBoard(createBoardDto: CreateBoardDto): Promise<Board> {
     return this.boardRepository.createBoard(createBoardDto);
   }
@@ -24,7 +28,12 @@ export class BoardsService {
     }
   }
 
-  getBoardById(id: number): Promise <Board> {
-    return this.boardRepository.getBoardById(id);
+  async updateBoardStatus(id: number, status: BoardStatus): Promise<Board> {
+    const board = await this.getBoardById(id);
+
+    board.status = status;
+    await this.boardRepository.save(board);
+
+    return board;
   }
 }
