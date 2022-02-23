@@ -25,8 +25,8 @@ export class BoardsService {
     return this.boardRepository.find(); // 모든 게시물 가져오기
   }
 
-  async deleteBoard(id: number): Promise<void> {
-    const result = await this.boardRepository.delete(id);
+  async deleteBoard(id: number, user:User): Promise<void> {
+    const result = await this.boardRepository.delete({id, user});
 
     if(result.affected === 0) {
       throw new NotFoundException(`Can't find Board with id ${id}`);

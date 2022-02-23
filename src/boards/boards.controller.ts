@@ -27,7 +27,7 @@ export class BoardsController {
   @Post()
   @UsePipes(ValidationPipe)
   createBoard(@Body() createBoardDto: CreateBoardDto,
-  @GetUser() user: User): Promise<Board> {
+  @GetUser() user:User): Promise<Board> {
     return this.boardsService.createBoard(createBoardDto, user);
   }
 
@@ -60,8 +60,10 @@ export class BoardsController {
   }
 
   @Delete('/:id')
-  deleteBoard(@Param('id', ParseIntPipe) id): Promise<void> {
-    return this.boardsService.deleteBoard(id);
+  deleteBoard(@Param('id', ParseIntPipe) id,
+  @GetUser() user:User
+  ): Promise<void> {
+    return this.boardsService.deleteBoard(id, user);
   }
 
   @Patch('/:id/status') // Update
